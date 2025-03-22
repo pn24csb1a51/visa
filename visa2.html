@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Requirement Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h2 {
+            color: #333;
+        }
+        input, select, button {
+            font-size: 18px;
+            padding: 10px 15px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: calc(100% - 30px);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button {
+            background: linear-gradient(135deg, #ff6a00, #ee0979);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            border: none;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #ee0979, #ff6a00);
+            transform: scale(1.05);
+        }
+        #message {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .error {
+            color: red;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Visa Requirement Checker</h2>
+        <input type="text" id="name" placeholder="Enter your full name">
+        <input type="text" id="passport" placeholder="Enter your passport number">
+        <input type="email" id="email" placeholder="Enter your email">
+        <label for="country">Select your country:</label>
+        <select id="country">
+            <option value="">--Select--</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="India">India</option>
+            <option value="UK">UK</option>
+            <option value="Australia">Australia</option>
+        </select>
+        <button onclick="checkVisa()">Check Visa</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        function checkVisa() {
+            var name = document.getElementById("name").value;
+            var passport = document.getElementById("passport").value;
+            var email = document.getElementById("email").value;
+            var country = document.getElementById("country").value;
+            var message = document.getElementById("message");
+            
+            if (!name || !passport || !email || !country) {
+                message.textContent = "Please fill in all details.";
+                message.classList.add("error");
+            } else {
+                var visaInfo = {
+                    "USA": "Visa required for most applicants.",
+                    "Canada": "Visa required unless you have an eTA.",
+                    "India": "Visa required before travel.",
+                    "UK": "Visa depends on the duration of stay.",
+                    "Australia": "eVisa available for eligible travelers."
+                };
+                message.textContent = visaInfo[country];
+                message.classList.remove("error");
+            }
+            
+            message.style.opacity = "1";
+            message.style.transform = "translateY(0px)";
+        }
+    </script>
+</body>
+</html>
