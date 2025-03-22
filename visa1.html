@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Requirement Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h2 {
+            color: #333;
+        }
+        select, button {
+            font-size: 18px;
+            padding: 10px 15px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: linear-gradient(135deg, #ff6a00, #ee0979);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            border: none;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #ee0979, #ff6a00);
+            transform: scale(1.05);
+        }
+        #message {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .error {
+            color: red;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Visa Requirement Checker</h2>
+        <label for="country">Select your country:</label>
+        <select id="country">
+            <option value="">--Select--</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="India">India</option>
+            <option value="UK">UK</option>
+            <option value="Australia">Australia</option>
+        </select>
+        <button onclick="checkVisa()">Check Visa</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        function checkVisa() {
+            var country = document.getElementById("country").value;
+            var message = document.getElementById("message");
+            
+            var visaInfo = {
+                "USA": "Visa required for most applicants.",
+                "Canada": "Visa required unless you have an eTA.",
+                "India": "Visa required before travel.",
+                "UK": "Visa depends on the duration of stay.",
+                "Australia": "eVisa available for eligible travelers."
+            };
+            
+            if (country in visaInfo) {
+                message.textContent = visaInfo[country];
+                message.classList.remove("error");
+            } else {
+                message.textContent = "Please select a country.";
+                message.classList.add("error");
+            }
+            
+            message.style.opacity = "1";
+            message.style.transform = "translateY(0px)";
+        }
+    </script>
+</body>
+</html>
